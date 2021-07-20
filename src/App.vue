@@ -1,13 +1,13 @@
 <template>
   <v-app class="main-view">
     <v-app-bar app dense absolute color="deep-purple accent-4" dark shrink-on-scroll >
-      <v-toolbar-title>Dalasito Wiki</v-toolbar-title>
+      <v-toolbar-title>Dalasito Wiki 📖</v-toolbar-title>
 
       <template v-slot:extension>
         <v-tabs align-with-title>
-          <v-tab>Personas</v-tab>
-          <v-tab>Animales</v-tab>
-          <v-tab>Objetos</v-tab>
+          <v-tab @click="getData('persona')">Personas 👨‍💼</v-tab>
+          <v-tab @click="getData('animal')">Animales 🐕</v-tab>
+          <v-tab @click="getData('objeto')">Objetos 🪑</v-tab>
         </v-tabs>
       </template>
     </v-app-bar>
@@ -15,7 +15,7 @@
     <v-main>
       <v-container>
         <v-row justify="center">
-          <template v-for="(item, i) in items">
+          <template v-for="(item, i) in actualItems">
             <v-col :key="i" cols="12" md="2" align="center">
               <v-hover v-slot="{ hover }">
                 <v-card
@@ -110,17 +110,26 @@ export default {
   name: "App",
   data() {
     return {
-      items : [],
+      actualItems : [],
+      selectedTab : "persona",
       dialog: false,
       selectedCharacter: null 
     };
   },
   mounted(){
-    this.getData()
+    this.getData("persona")
   },
   methods:{
-    getData(){
-      this.items = items
+    getData(selectedTab){
+      this.actualItems = items
+      const filteredItems = []
+      this.actualItems.forEach(element => {
+        if(element.type == selectedTab){
+          filteredItems.push(element)
+        }
+      });
+      this.actualItems = filteredItems
+      
     },
     loadCharacterInfo(name){
       this.dialog = true
