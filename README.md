@@ -6,3 +6,7 @@ Wiki de personajes que han aparecido en el canal, con fotos y una descripción d
 * npm install
 * npm run serve
 ```
+La app es responsiva, por lo que se puede visualizar sin problema tanto en PC como en dispositivos moviles.
+![](images/desktop.png)
+
+![](images/mobile.png)
